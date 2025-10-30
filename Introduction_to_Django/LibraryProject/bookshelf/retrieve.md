@@ -10,6 +10,14 @@ from bookshelf.models import Book
 Book.objects.all()
 
 
+# Retrieve the book to update
+book = Book.objects.get(title="1984")
+
+# Update the title
+book.title = "Nineteen Eighty-Four"
+book.save()
+
+book
 Expected Output:
 
 # <QuerySet [<Book: 1984 by George Orwell>]>
