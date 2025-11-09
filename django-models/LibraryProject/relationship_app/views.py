@@ -8,7 +8,11 @@ from django.contrib.auth import authenticate
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
+<<<<<<< HEAD
 from django.contrib.auth.forms import AuthenticationForm
+=======
+from django.contrib.auth import AuthenticationForm
+>>>>>>> 639db32d5950db407b3de125d5139eede43f7228
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 
