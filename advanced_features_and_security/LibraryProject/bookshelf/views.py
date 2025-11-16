@@ -45,3 +45,19 @@ def search_books(request):
     query = request.GET.get('q', '')
     books = Book.objects.filter(title__icontains=query)  # ORM handles parameterization
     return render(request, 'bookshelf/book_list.html', {'books': books})
+
+
+
+def example_view(request):
+    if request.method == 'POST':
+        form = ExampleForm(request.POST)
+        if form.is_valid():
+            # Process the form data
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            # Do something with the data...
+            return redirect('success_page')  # Replace with your URL name
+    else:
+        form = ExampleForm()
+    
+    return render(request, 'bookshelf/form_example.html', {'form': form})
