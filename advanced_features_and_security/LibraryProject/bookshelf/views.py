@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import permission_required
 from django.shortcuts import get_object_or_404, redirect, render
 from bookshelf.models import Book
 from .forms import BookForm
-from bookshelf.forms import ExampleForm
+from .forms import ExampleForm
 
 
 @permission_required('bookshelf.can_create', raise_exception=True)
