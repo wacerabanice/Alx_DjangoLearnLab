@@ -128,3 +128,35 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
+
+
+# SECURITY ENHANCEMENTS
+
+# In production, always set DEBUG = False
+DEBUG = False
+
+# Browser security settings
+SECURE_BROWSER_XSS_FILTER = True             # XSS filter enabled
+X_FRAME_OPTIONS = 'DENY'                     # Prevent clickjacking
+SECURE_CONTENT_TYPE_NOSNIFF = True           # Prevent MIME type sniffing
+
+# Cookies security
+CSRF_COOKIE_SECURE = True                    # Only send CSRF cookie over HTTPS
+SESSION_COOKIE_SECURE = True                 # Only send session cookie over HTTPS
+
+# Optional: HSTS for HTTPS
+SECURE_HSTS_SECONDS = 31536000               # Enforce HTTPS for 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+INSTALLED_APPS += ['csp']
+
+MIDDLEWARE += [
+    'csp.middleware.CSPMiddleware',
+]
+
+# CSP settings
+CSP_DEFAULT_SRC = ("'self'",)              # Only allow same origin content
+CSP_SCRIPT_SRC = ("'self'", 'ajax.googleapis.com')  # Example: allow JS from self & Google APIs
+CSP_STYLE_SRC = ("'self'", 'fonts.googleapis.com')
+CSP_IMG_SRC = ("'self'", 'data:')
