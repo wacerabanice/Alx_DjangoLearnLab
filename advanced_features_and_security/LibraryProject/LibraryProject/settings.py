@@ -160,3 +160,26 @@ CSP_DEFAULT_SRC = ("'self'",)              # Only allow same origin content
 CSP_SCRIPT_SRC = ("'self'", 'ajax.googleapis.com')  # Example: allow JS from self & Google APIs
 CSP_STYLE_SRC = ("'self'", 'fonts.googleapis.com')
 CSP_IMG_SRC = ("'self'", 'data:')
+
+
+# Redirect all HTTP requests to HTTPS
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+
+# HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = 31536000  # One year in seconds
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
+SECURE_HSTS_PRELOAD = True  # Allow browsers to preload this HSTS policy
+
+# Cookies security
+SESSION_COOKIE_SECURE = True  # Only send session cookie over HTTPS
+CSRF_COOKIE_SECURE = True  # Only send CSRF cookie over HTTPS
+
+# Clickjacking protection
+X_FRAME_OPTIONS = 'DENY'  # Prevent site from being embedded in iframes
+
+# Prevent MIME type sniffing
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Enable browser's XSS protection
+SECURE_BROWSER_XSS_FILTER = True
