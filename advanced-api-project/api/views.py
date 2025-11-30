@@ -22,7 +22,11 @@ class BookListView(generics.ListAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
     # Specify which backends to use for this view (optional if REST_FRAMEWORK defaults set)
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filter_backends = [DjangoFilterBackend, 
+    filters.OrderingFilter, 
+    filters.OrderingFilter, 
+    SearchFilter,
+    ]
 
     # Allow filtering by these model fields (exact match)
     filterset_fields = ['title', 'publication_year', 'author']
