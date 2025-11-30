@@ -22,3 +22,9 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = ['name', 'books']
+
+#Prevent duplicate titles
+def validate_title(self, value):
+        if Book.objects.filter(title=value).exists():
+            raise serializers.ValidationError("A book with this title already exists.")
+        return value
