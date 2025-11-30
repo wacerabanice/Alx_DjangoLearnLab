@@ -25,7 +25,7 @@ class BookListView(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend, 
     filters.OrderingFilter, 
     filters.OrderingFilter, 
-    SearchFilter,
+    filters.SearchFilter,
     ]
 
     # Allow filtering by these model fields (exact match)
