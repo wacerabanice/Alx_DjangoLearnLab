@@ -6,6 +6,10 @@ from .models import Post, Comment
 from .forms import CommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import CreateView, UpdateView, DeleteView
+from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
+from .models import Post
+
 
 
 def index(request):
@@ -128,3 +132,16 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('post_detail', kwargs={'post_id': self.object.post.id})
+
+def search_posts(request):
+    query = request.GET.get('q')  # get the search keyword from URL like ?q=django
+    if query:
+        posts = Post.objects.filter(
+            Q(title__icontains=query) |          # search in title
+            Q(content__icontains=query) |        # search in content
+            Q(tags__name__icontains=query)       # search in tags
+        ).distinct()
+    else:
+        posts = Post.objects.all()  # if no query, show all posts
+
+    return render(request, 'blog/search_results.html', {'posts': posts, 'query': query})
