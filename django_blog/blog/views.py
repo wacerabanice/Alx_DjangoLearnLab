@@ -9,6 +9,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
 from .models import Post
+from taggit.models import Tag
 
 
 
@@ -145,3 +146,8 @@ def search_posts(request):
         posts = Post.objects.all()  # if no query, show all posts
 
     return render(request, 'blog/search_results.html', {'posts': posts, 'query': query})
+
+def posts_by_tag(request, tag_slug):
+    tag = get_object_or_404(Tag, slug=tag_slug)
+    posts = Post.objects.filter(tags__slug=tag_slug)
+    return render(request, 'blog/posts_by_tag.html', {'tag': tag, 'posts': posts})
