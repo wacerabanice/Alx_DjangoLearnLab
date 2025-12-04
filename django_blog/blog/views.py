@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, UserUpdateForm
 from .models import Post, Comment
 from .forms import CommentForm
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import CreateView, UpdateView, DeleteView
+
 
 def index(request):
     return render(request, 'blog/index.html')
