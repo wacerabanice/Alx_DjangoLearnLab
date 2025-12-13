@@ -4,6 +4,7 @@ from .views import PostViewSet, CommentViewSet
 
 
 router = DefaultRouter()
+path('feed/', FeedView.as_view(), name='feed'),
 router.register(r'posts', PostViewSet, basename='post')
 router.register(r'comments', CommentViewSet, basename='comment')
 
