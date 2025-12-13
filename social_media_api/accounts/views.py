@@ -15,7 +15,8 @@ class RegisterView(generics.CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         response = super().create(request, *args, **kwargs)
-        user = User.objects.get(id=response.data["id"])
+        User = get_user_model()  # gets the currently active user model
+        users = User.objects.all()
         token, _ = Token.objects.get_or_create(user=user)
 
         return Response({
