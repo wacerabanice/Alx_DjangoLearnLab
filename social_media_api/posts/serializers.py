@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Post, Comment
-
+from .models import Notification
 
 class CommentSerializer(serializers.ModelSerializer):
     author_username = serializers.ReadOnlyField(source='author.username')
@@ -27,3 +27,9 @@ def create(self, validated_data):
     request = self.context.get('request')
     user = request.user if request else None
     return Post.objects.create(author=user, **validated_data)
+
+
+class NotificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = ['id', 'actor', 'verb', 'target', 'read', 'timestamp']
