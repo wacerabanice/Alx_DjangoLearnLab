@@ -69,3 +69,23 @@ python manage.py createsuperuser
 Access the admin panel:
 
 http://127.0.0.1:8000/admin/
+
+API Documentation
+
+| Method | URL              | Description                  | Auth Required |
+| ------ | ---------------- | ---------------------------- | ------------- |
+| GET    | /api/posts/      | List all posts               | Yes           |
+| POST   | /api/posts/      | Create a new post            | Yes           |
+| GET    | /api/posts/{id}/ | Retrieve single post details | Yes           |
+| PUT    | /api/posts/{id}/ | Update a post (owner only)   | Yes           |
+| DELETE | /api/posts/{id}/ | Delete a post (owner only)   | Yes           |
+
+
+Comments Endpoints
+| Method | URL                 | Description                   | Auth Required |
+| ------ | ------------------- | ----------------------------- | ------------- |
+| GET    | /api/comments/      | List all comments             | Yes           |
+| POST   | /api/comments/      | Create a new comment          | Yes           |
+| GET    | /api/comments/{id}/ | Retrieve single comment       | Yes           |
+| PUT    | /api/comments/{id}/ | Update a comment (owner only) | Yes           |
+| DELETE | /api/comments/{id}/ | Delete a comment (owner only) | Yes           |
