@@ -9,7 +9,7 @@ class CustomUser(AbstractUser):
         null=True
     )
 
-        followers = models.ManyToManyField(
+    followers = models.ManyToManyField(
         "self",
         symmetrical=False,
         related_name="following",
