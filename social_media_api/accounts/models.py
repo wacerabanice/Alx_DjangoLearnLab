@@ -21,5 +21,12 @@ class Profile(models.Model):
         return f"{self.user.username}'s profile"
 
 class CustomUser(AbstractUser):
-    # Add any extra fields you want here
-    pass
+    following = models.ManyToManyField(
+        'self',
+        symmetrical=False,
+        related_name='followers',
+        blank=True
+    )
+
+    def __str__(self):
+        return self.username
